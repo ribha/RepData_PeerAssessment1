@@ -94,7 +94,7 @@ narows <- sum(is.na(activity$steps))
 Total number of rows with NAs is
 
 ```{r, echo=FALSE}
-intervalmaxsteps
+narows
 
 ```
 
@@ -182,7 +182,28 @@ ggplot(data=avgstepsperintervalperday, aes(x=interval, y=steps)) +
     labs(title="Average Number of Steps per Time Interval per Day")
 ```
 
+As seen from the panel plot, the peak for the average number of steps is on weekdays. However, the number of steps taken (daily average) is more on weekends as compared to weekdays.
+To further verify this, this is how the average steps and max steps (peak point) compare for weekends and weekdays. 
 
+```{r average steps for weekday vs weekends}
+avgstepsperday = aggregate(x=list(steps=avgstepsperintervalperday$steps), by=list(day=avgstepsperintervalperday$day), mean, na.rm=TRUE)
+```
+
+Average steps for weekday vs. weekends:
+```{r, echo=FALSE}
+avgstepsperday
+
+```
+
+```{r max steps for weekday vs weekends}
+maxstepsperday = aggregate(x=list(steps=avgstepsperintervalperday$steps), by=list(day=avgstepsperintervalperday$day), max, na.rm=TRUE)
+```
+
+Max steps (per interval) for weekday vs. weekends:
+```{r, echo=FALSE}
+maxstepsperday
+
+```
 
 
 

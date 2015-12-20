@@ -124,7 +124,7 @@ Total number of rows with NAs is
 
 
 ```
-## [1] 104
+## [1] 2304
 ```
 
 Devise a strategy for filling in all of the missing values in the dataset. The strategy used is to use the mean for that 5-minute interval for the remaining days instead of NA. 
@@ -220,7 +220,34 @@ ggplot(data=avgstepsperintervalperday, aes(x=interval, y=steps)) +
 
 ![plot of chunk average steps per interval per day](figure/average steps per interval per day-1.png) 
 
+As seen from the panel plot, the peak for the average number of steps is on weekdays. However, the number of steps taken (daily average) is more on weekends as compared to weekdays.
+To further verify this, this is how the average steps and max steps (peak point) compare for weekends and weekdays. 
 
+
+```r
+avgstepsperday = aggregate(x=list(steps=avgstepsperintervalperday$steps), by=list(day=avgstepsperintervalperday$day), mean, na.rm=TRUE)
+```
+
+Average steps for weekday vs. weekends:
+
+```
+##       day    steps
+## 1 Weekday 35.61058
+## 2 Weekend 42.36640
+```
+
+
+```r
+maxstepsperday = aggregate(x=list(steps=avgstepsperintervalperday$steps), by=list(day=avgstepsperintervalperday$day), max, na.rm=TRUE)
+```
+
+Max steps (per interval) for weekday vs. weekends:
+
+```
+##       day    steps
+## 1 Weekday 230.3782
+## 2 Weekend 166.6392
+```
 
 
 
