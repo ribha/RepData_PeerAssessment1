@@ -7,9 +7,10 @@ library(ggplot2)
 ```
 
 ###Loading and preprocessing the data
-
+Note: Activity.zip should be present in the working directory. It can be taken from this same github repository.
 Load using read.csv
 ```{r load data}
+unzip("activity.zip")
 activity <- read.csv('activity.csv')
 ```
 
@@ -22,6 +23,7 @@ names(activity)
 Preprocess the data
 ```{r preprocess data}
 activity$date <- as.Date(activity$date, "%Y-%m-%d")
+
 ```
 
 ###What is mean total number of steps taken per day?
@@ -75,7 +77,7 @@ ggplot(data=avgstepsperinterval, aes(interval, steps)) +
 Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```{r interval with max avg steps}
-intervalmaxsteps <- which.max(avgstepsperinterval$steps)
+intervalmaxsteps = avgstepsperinterval[avgstepsperinterval$steps == max(avgstepsperinterval$steps), ]
 ```
 
 Interval with max number of average steps across all days is 

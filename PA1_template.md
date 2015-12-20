@@ -7,10 +7,11 @@ library(ggplot2)
 ```
 
 ###Loading and preprocessing the data
-
+Note: Activity.zip should be present in the working directory. It can be taken from this same github repository.
 Load using read.csv
 
 ```r
+unzip("activity.zip")
 activity <- read.csv('activity.csv')
 ```
 
@@ -103,13 +104,14 @@ Which 5-minute interval, on average across all the days in the dataset, contains
 
 
 ```r
-intervalmaxsteps <- which.max(avgstepsperinterval$steps)
+intervalmaxsteps = avgstepsperinterval[avgstepsperinterval$steps == max(avgstepsperinterval$steps), ]
 ```
 
 Interval with max number of average steps across all days is 
 
 ```
-## [1] 104
+##     interval    steps
+## 104      835 206.1698
 ```
 
 ###Imputing missing values
